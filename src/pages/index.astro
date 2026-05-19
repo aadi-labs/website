@@ -8,110 +8,120 @@ import Base from "../layouts/Base.astro";
   <main class="container" role="main">
     <section class="content">
       <p>
-        Most AI today is built to replace people, not augment them.
-        We're building the opposite: AI for higher agency and bigger
-        ambition. Software that makes one person more capable, not less
-        necessary. AI that self-improves and collaborates with you to
-        reach what neither could alone.
+        We're building AI that self-improves and collaborates with
+        people and teams to reach what neither could alone: built to
+        10x agency and ambition, not replace them.
       </p>
 
       <h2>Models are not products.</h2>
 
       <p>
-        Today's AI products don't self-improve. The model is frozen the
-        day it ships. The harness around it is static. Memory features
-        store facts to look up later, which is useful but not learning.
-        The system doesn't get sharper because you used it yesterday.
+        Today's AI doesn't learn from you. The model is frozen at ship;
+        the harness is static; memory features store facts but the
+        system doesn't get sharper because you used it yesterday. A
+        truly intelligent product does the opposite: invisible
+        underneath, evolves to fit the person using it, gets sharper on
+        its own.
       </p>
 
-      <p>
-        A truly intelligent product would do the opposite. The model
-        would be invisible. The product would learn from real use,
-        evolve to fit the specific person using it, and get sharper
-        every day on its own.
-      </p>
+      <h2>Two research bets.</h2>
 
-      <h2>The bet: continual learning and pluralistic alignment</h2>
-
-      <p>
-        Two research bets sit underneath everything we ship.
-        <strong>Continual learning</strong>: systems that keep getting
-        sharper from real production experience, without regressing on
-        what they already got right. <strong>Pluralistic alignment</strong>:
-        staying true to the specific person or organization they serve,
-        not to a population average.
-      </p>
+      <ul class="bet-list">
+        <li>
+          <strong>Continual learning</strong>: systems that keep getting
+          sharper from real production use, without regressing on what
+          they already got right.
+        </li>
+        <li>
+          <strong>Pluralistic alignment</strong>: staying true to the
+          specific person or organization, not a population average.
+        </li>
+      </ul>
 
       <h2>We own the stack.</h2>
 
       <p>
         We're not a wrapper around someone else's API. The whole stack,
-        from product to research, is ours. That lets us take bets other
-        labs won't, change direction when the evidence demands it, and
-        put every interaction to work twice: serving the user now, and
-        training what comes next.
+        from research to product, is ours. That lets us take bets other
+        labs won't, change direction with evidence, and put every
+        interaction to work twice: serving the user now, training what
+        comes next. Not one model for millions, but millions of
+        distinct intelligences, each diverging into something only its
+        user has.
+      </p>
+
+      <h2>Why this matters.</h2>
+
+      <p>
+        Intelligence at this scale only works as co-evolution. The
+        system gets sharper the longer you use it. You get more capable
+        the longer you have it. The relationship is the unit of
+        progress.
       </p>
 
       <p>
-        While we research the next sample-efficient pretraining
-        architecture, we're productionizing the leading edges of
-        sleep-time and test-time compute, context engineering, and RL
-        research to bring a self-improving, distinctive intelligence
-        product to market.
-      </p>
-
-      <h2>Why this matters</h2>
-
-      <p>
-        We are not building AI to replace people. We are building it to
-        let them aim higher. The honest version of intelligence at this
-        scale is human-AI co-evolution: the system gets sharper the
-        longer you use it, and you get more capable the longer you have
-        it. The relationship is the unit of progress.
-      </p>
-
-      <p>
-        A lot of capability and creativity is local. One person, one
-        community, one tradition of craft. Most of it never compounds
+        A lot of capability and creativity is local &mdash; one person,
+        one community, one tradition of craft. Most never compounds
         into anything visible because the leverage isn't there.
         Ramanujan almost didn't reach the world. The next decade of AI
-        is the difference between finding the next one and never knowing
-        they existed.
+        is the difference between finding the next one and never
+        knowing they existed.
       </p>
 
-      <p>
-        Done right, this kind of software is how distributed human
-        intelligence finally compounds. Done wrong, it's how we lose it.
-        That's the bet, and that's why we're building Aadi Labs.
-      </p>
+      <h2>Who's building it.</h2>
 
       <p>
-        A small, mission-driven team, in this for the long haul.
+        Mission-driven small team at the intersection of AI research
+        and design. Battle-tested in building products for billions of
+        users and top tech companies.
       </p>
 
       <h2>Two products. One engine.</h2>
 
       <div class="products">
         <article class="product">
-          <h3 class="product-name">Jinnie</h3>
-          <p class="product-meta">
-            For individuals and small teams. The waitlist is open at
+          <p class="product-eyebrow">Waitlist open</p>
+          <h3 class="product-name">
             <a
-              class="link"
+              class="product-link"
               href="https://jinnie.ai"
               target="_blank"
-              rel="noopener">jinnie.ai</a
-            >.
-          </p>
+              rel="noopener">Jinnie</a
+            >
+          </h3>
+          <p class="product-meta">For one person, or a small team.</p>
         </article>
 
         <article class="product">
+          <p class="product-eyebrow">Organizations &middot; in development</p>
           <h3 class="product-name">Sal</h3>
-          <p class="product-meta">
-            For enterprise.
-          </p>
+          <p class="product-meta">In development.</p>
         </article>
       </div>
+      <script is:inline>
+        /* Reveal the products section once it enters the viewport.
+           Progressive enhancement: initial CSS leaves content visible
+           so no-JS readers and reduced-motion users see it immediately.
+           This script *opts in* to the hidden start state, then animates. */
+        (function () {
+          var el = document.currentScript.previousElementSibling;
+          if (!el) return;
+          if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+          el.classList.add("reveal-ready");
+          var io = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("is-revealed");
+                  io.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
+          );
+          io.observe(el);
+        })();
+      </script>
     </section>
   </main>
 </Base>
