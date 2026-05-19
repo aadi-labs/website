@@ -406,6 +406,37 @@ h1 {
   margin: 4px 0 0;
 }
 
+/* Konami code easter egg — hidden footnote bar pinned to viewport bottom.
+   Revealed via keyboard sequence handler in src/pages/index.astro. */
+.egg {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  background: var(--bg);
+  border-top: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 14px 20px;
+  text-align: center;
+  transform: translateY(100%);
+  transition: transform 400ms var(--ease-out);
+}
+
+.egg.is-revealed {
+  transform: translateY(0);
+}
+
+.egg-text {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.egg-marker {
+  margin-right: 4px;
+  opacity: 0.6;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

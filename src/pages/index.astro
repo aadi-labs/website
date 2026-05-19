@@ -60,12 +60,16 @@ import Base from "../layouts/Base.astro";
       </p>
 
       <p>
-        A lot of capability and creativity is local &mdash; one person,
-        one community, one tradition of craft. Most never compounds
-        into anything visible because the leverage isn't there.
-        Ramanujan almost didn't reach the world. The next decade of AI
-        is the difference between finding the next one and never
-        knowing they existed.
+        A lot of capability and creativity is local. One person, one
+        community, one tradition of craft. This is Hayek's knowledge
+        problem: the knowledge that matters is dispersed across
+        individuals, beyond any central authority's reach. The best
+        decisions belong with the people who hold the local knowledge.
+        So does the agency to act on them. Most never compounds into
+        anything visible because the leverage isn't there. Ramanujan
+        almost didn't reach the world. The next decade of AI is the
+        difference between finding the next one and never knowing they
+        existed.
       </p>
 
       <h2>Who's building it.</h2>
@@ -120,6 +124,43 @@ import Base from "../layouts/Base.astro";
             { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
           );
           io.observe(el);
+        })();
+      </script>
+
+      <div class="egg" id="egg" hidden>
+        <p class="egg-text">
+          <span class="egg-marker" aria-hidden="true">&sup1;</span>
+          You read closely. We hire for that.
+          <a class="link" href="mailto:hi@aadilabs.com?subject=I%20read%20closely">hi@aadilabs.com</a>
+        </p>
+      </div>
+      <script is:inline>
+        /* Konami code easter egg: ↑↑↓↓←→←→BA reveals a hidden footnote bar.
+           Targets the kind of careful reader who'd recognize the sequence. */
+        (function () {
+          var sequence = [
+            "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown",
+            "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight",
+            "KeyB", "KeyA"
+          ];
+          var idx = 0;
+          document.addEventListener("keydown", function (e) {
+            if (e.code === sequence[idx]) {
+              idx++;
+              if (idx === sequence.length) {
+                var egg = document.getElementById("egg");
+                if (egg) {
+                  egg.removeAttribute("hidden");
+                  requestAnimationFrame(function () {
+                    egg.classList.add("is-revealed");
+                  });
+                }
+                idx = 0;
+              }
+            } else {
+              idx = e.code === sequence[0] ? 1 : 0;
+            }
+          });
         })();
       </script>
     </section>
