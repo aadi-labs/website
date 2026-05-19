@@ -1,0 +1,115 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Aadi Labs, Inc",
+  description = "Product driven AI research lab building next generation of personal agents.",
+} = Astro.props;
+
+const pathname = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === "/" ? pathname === "/" : pathname.startsWith(href);
+---
+
+<!doctype html>
+<html lang="en" data-theme="auto">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="dark" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Aadi Labs, Inc." />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={Astro.url.href} />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@aadilabsinc" />
+    <meta name="twitter:creator" content="@aadilabsinc" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <link
+      rel="preload"
+      href="/Oceanside Typewriter.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title="Aadi Labs Blog" href="/rss.xml" />
+  </head>
+  <body>
+    <header class="top-bar">
+      <a href="/" class="brand">Aadi Labs</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/blog" class:list={["nav-link", { active: isActive("/blog") }]}>Blog</a>
+        <button class="theme-toggle" type="button" aria-label="Toggle theme">🌙</button>
+      </nav>
+    </header>
+
+    <slot />
+
+    <footer class="footer" role="contentinfo">
+      <p>
+        <strong>Aadi Labs, Inc.</strong> &middot; San Francisco, CA
+      </p>
+      <p>
+        <a class="link" href="mailto:hi@aadilabs.com">hi@aadilabs.com</a>
+        &middot;
+        <a
+          class="link"
+          href="https://x.com/aadilabsinc"
+          rel="me noopener"
+          target="_blank"
+        >
+          @aadilabsinc on X
+        </a>
+      </p>
+    </footer>
+
+    <script is:inline>
+      (function () {
+        const storageKey = "aadi-theme-preference";
+        const root = document.documentElement;
+        const toggleBtn = document.querySelector(".theme-toggle");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+        function resolveAutoTheme() {
+          return prefersDark.matches ? "dark" : "light";
+        }
+
+        function applyTheme(value) {
+          const theme = value === "light" || value === "dark" ? value : resolveAutoTheme();
+          root.setAttribute("data-theme", theme);
+          if (toggleBtn) toggleBtn.textContent = theme === "dark" ? "☀️" : "🌙";
+        }
+
+        const saved = localStorage.getItem(storageKey);
+        applyTheme(saved || "auto");
+
+        if (toggleBtn) {
+          toggleBtn.addEventListener("click", function () {
+            const current = root.getAttribute("data-theme");
+            const next = current === "dark" ? "light" : "dark";
+            localStorage.setItem(storageKey, next);
+            applyTheme(next);
+          });
+        }
+
+        prefersDark.addEventListener("change", function () {
+          const savedPref = localStorage.getItem(storageKey);
+          if (!savedPref) applyTheme("auto");
+        });
+      })();
+
+    </script>
+  </body>
+</html>

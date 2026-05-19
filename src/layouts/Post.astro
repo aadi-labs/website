@@ -1,0 +1,38 @@
+---
+import Base from "./Base.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+}
+
+const { title, description, pubDate, updatedDate } = Astro.props;
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<Base title={`${title} — Aadi Labs`} description={description}>
+  <main class="container" role="main">
+    <article class="prose">
+      <header>
+        <h1>{title}</h1>
+        <p class="post-meta">
+          <time datetime={pubDate.toISOString()}>{dateFormatter.format(pubDate)}</time>
+          {updatedDate && (
+            <>
+              {" · updated "}
+              <time datetime={updatedDate.toISOString()}>{dateFormatter.format(updatedDate)}</time>
+            </>
+          )}
+        </p>
+      </header>
+      <slot />
+    </article>
+  </main>
+</Base>

@@ -1,0 +1,342 @@
+/*
+  Minimal styles for Aadi Labs, Inc
+  - System font stack
+  - Light/Dark via [data-theme]
+  - Accessible focus states
+  - Responsive, centered layout
+*/
+
+/* Oceanside Typewriter font (local) */
+@font-face {
+  font-family: "Oceanside Typewriter";
+  src: local("Oceanside Typewriter"), url("/Oceanside Typewriter.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Color and motion tokens */
+:root {
+  --bg: #ffffff;
+  --fg: #0f172a; /* slate-900 */
+  --muted: #475569; /* slate-600 */
+  --link: #0ea5e9; /* sky-500 */
+  --button-bg: #0ea5e9;
+  --button-fg: #ffffff;
+  --ring: rgba(14, 165, 233, 0.35);
+
+  /* Stronger than the built-in CSS easings */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+[data-theme="dark"] {
+  --bg: #663e1d00; /* near-slate-950 */
+  --fg: #e5e7eb; /* slate-200 */
+  --muted: #9ca3af; /* gray-400 */
+  --link: #b36e41; /* sky-400 */
+  --button-bg: #38bdf8;
+  --button-fg: #081018;
+  --ring: rgba(56, 189, 248, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Oceanside Typewriter", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", Courier, monospace;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 250ms var(--ease-out), color 250ms var(--ease-out);
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px 20px;
+}
+
+.brand {
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.theme-toggle {
+  background: transparent;
+  color: var(--fg);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: box-shadow 150ms var(--ease-out), border-color 150ms var(--ease-out), transform 160ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .theme-toggle:hover {
+    transform: translateY(-1px);
+  }
+}
+
+.theme-toggle:active {
+  transform: scale(0.97);
+}
+
+.theme-toggle:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ring);
+  border-color: var(--button-bg);
+}
+
+.container {
+  min-height: calc(100dvh - 96px);
+  display: grid;
+  place-items: center;
+  padding: 24px 20px 40px;
+}
+
+.content {
+  width: 100%;
+  max-width: 920px;
+  text-align: left;
+}
+
+h1 {
+  font-size: clamp(28px, 6vw, 44px);
+  line-height: 1.15;
+  margin: 0 0 12px;
+}
+
+.tagline {
+  font-size: clamp(16px, 3.2vw, 20px);
+  color: var(--muted);
+  margin: 0 0 20px;
+}
+
+.link {
+  color: var(--link);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom-color 150ms var(--ease-out), color 150ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link:hover {
+    text-decoration: underline;
+  }
+}
+
+.link:focus-visible,
+.button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+.cta-row {
+  display: inline-flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 16px 0 8px;
+}
+
+.label {
+  color: var(--muted);
+}
+
+.button {
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--button-bg);
+  color: var(--button-fg);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.25);
+  transition: transform 160ms var(--ease-out), box-shadow 200ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(14, 165, 233, 0.32);
+  }
+}
+
+.button:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.25);
+}
+
+.contact {
+  color: var(--muted);
+}
+
+.footer {
+  text-align: center;
+  padding: 16px 20px 28px;
+  color: var(--muted);
+}
+
+/* Site navigation */
+.site-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.nav-link {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 15px;
+  padding: 6px 4px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.nav-link.active {
+  color: var(--fg);
+  border-bottom-color: var(--link);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav-link:hover {
+    color: var(--fg);
+    border-bottom-color: var(--link);
+  }
+}
+
+.nav-link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ring);
+  border-radius: 4px;
+}
+
+/* Products section — display-typography finale on the homepage */
+.products {
+  display: grid;
+  gap: 56px;
+  margin: 48px 0 24px;
+}
+
+.product {
+  display: block;
+}
+
+.product-name {
+  font-size: clamp(36px, 7vw, 56px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin: 0 0 14px;
+  font-weight: 400;
+}
+
+.product-meta {
+  font-size: clamp(15px, 2.2vw, 17px);
+  color: var(--muted);
+  margin: 0;
+  max-width: 52ch;
+  line-height: 1.5;
+}
+
+/* Prose-style content for mission and blog posts */
+.prose {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.prose h1 {
+  margin-bottom: 8px;
+}
+
+.prose .post-meta {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0 0 28px;
+}
+
+.prose p,
+.prose ul,
+.prose ol {
+  margin: 0 0 18px;
+}
+
+.prose h2 {
+  font-size: clamp(20px, 3.6vw, 26px);
+  margin: 32px 0 12px;
+}
+
+/* Blog index list */
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 28px;
+}
+
+.post-list li {
+  display: grid;
+  gap: 4px;
+}
+
+.post-list .post-title {
+  font-size: clamp(20px, 3.6vw, 24px);
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.post-list .post-title:hover {
+  color: var(--link);
+}
+
+.post-list .post-date {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.post-list .post-description {
+  color: var(--muted);
+  margin: 4px 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    /* Kill keyframe animations and transform/position motion,
+       but preserve opacity and color transitions for state legibility. */
+    animation: none !important;
+    transition-property: opacity, color, background-color, border-color, fill, stroke !important;
+    transition-duration: 200ms !important;
+  }
+}
+
+
