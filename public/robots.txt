@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aadilabs.com/sitemap-index.xml
+

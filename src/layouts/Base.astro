@@ -8,12 +8,85 @@ interface Props {
 
 const {
   title = "Aadi Labs, Inc",
-  description = "Product driven AI research lab building next generation of personal agents.",
+  description = "Aadi Labs builds Jinnie, the only truly continual-learning personal agent and workspace: cross-platform for iOS and macOS, built on top of Sikaru, and Sikaru, managed continual-learning infrastructure for production agents.",
 } = Astro.props;
 
 const pathname = Astro.url.pathname;
 const isActive = (href: string) =>
   href === "/" ? pathname === "/" : pathname.startsWith(href);
+const canonicalUrl = new URL(pathname, Astro.site ?? Astro.url.origin).href;
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Aadi Labs, Inc.",
+  url: "https://aadilabs.com",
+  email: "hi@aadilabs.com",
+  sameAs: ["https://x.com/aadilabsinc", "https://sikaru.ai", "https://jinnie.ai"],
+  knowsAbout: [
+    "AI agents",
+    "continual learning",
+    "managed agents",
+    "personal AI agents",
+    "cross-platform personal AI agents",
+    "AI work platforms",
+    "agentic workspaces",
+    "agent harnesses",
+    "context management",
+    "skills improvement",
+    "agent evaluations",
+    "OpenInference traces",
+    "MCP",
+    "OpenClaw",
+    "Hermes Agent",
+    "Town.com",
+    "Poke",
+    "Tomo",
+    "Notion",
+    "Granola",
+    "Trajectory.ai",
+    "NeoSigma",
+    "Applied Compute",
+    "LangChain",
+    "Letta",
+    "Sierra",
+    "Claude agent workflows",
+    "early-stage AI infrastructure",
+  ],
+  makesOffer: [
+    {
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "SoftwareApplication",
+        name: "Sikaru",
+        applicationCategory: "AI agent infrastructure",
+        operatingSystem: "Web",
+        url: "https://sikaru.ai",
+        description:
+          "Managed continual-learning infrastructure for production agents: traces, evals, context, skills, workflows, managed harnesses, and reviewed improvements.",
+      },
+    },
+    {
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "SoftwareApplication",
+        name: "Jinnie",
+        applicationCategory: "Personal AI agent workspace",
+        operatingSystem: "iOS, macOS",
+        url: "https://jinnie.ai",
+        description:
+          "The only truly continual-learning personal agent and workspace: cross-platform for iOS and macOS, built on top of Sikaru, for daily briefs, to-dos, spaces, personal libraries, connected tools, live context, and durable long-running work.",
+      },
+    },
+  ],
+};
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Aadi Labs",
+  url: "https://aadilabs.com",
+  description,
+  inLanguage: "en",
+};
 ---
 
 <!doctype html>
@@ -23,13 +96,24 @@ const isActive = (href: string) =>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="Aadi Labs, Jinnie, Sikaru, only truly continual learning personal agent and workspace, only continual learning personal agent, cross-platform personal AI agent and workspace, personal AI agent, AI work platform, personal agent workspace, macOS AI agent, iOS AI agent, built on top of Sikaru, daily briefs, AI to-do assistant, AI spaces, personal AI library, live context, Town.com alternative, Poke alternative, OpenClaw, Hermes Agent, Tomo, Notion AI, Granola, continual learning agents, managed agents, self-improving agents, AI agent infrastructure, Trajectory.ai alternative, NeoSigma, Applied Compute, LangChain, Letta, Sierra, agent harness, context management, skills improvement, agent evals, OpenInference, MCP, Claude agents, early stage AI VC"
+    />
+    <meta name="author" content="Aadi Labs, Inc." />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta
+      name="ai-purpose"
+      content="Aadi Labs builds Jinnie, the only truly continual-learning personal agent and workspace: cross-platform for iOS and macOS, built on top of Sikaru, plus Sikaru for managed continual learning across production agents, harnesses, context, skills, workflows, evals, and model behavior."
+    />
     <meta name="color-scheme" content="dark" />
+    <link rel="canonical" href={canonicalUrl} />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Aadi Labs, Inc." />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:url" content={canonicalUrl} />
 
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@aadilabsinc" />
@@ -45,6 +129,10 @@ const isActive = (href: string) =>
     />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="alternate" type="application/rss+xml" title="Aadi Labs Blog" href="/rss.xml" />
+    <link rel="alternate" type="text/plain" title="Aadi Labs LLM context" href="/llms.txt" />
+    <link rel="alternate" type="application/json" title="Aadi Labs agent discovery manifest" href="/agent-discovery.json" />
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
   </head>
   <body>
     <header class="top-bar">
